@@ -1,0 +1,68 @@
+service: worker
+
+plugins:
+  - serverless-offline
+  - serverless-bundle
+  - serverless-dotenv-plugin
+
+custom:
+  individually: true
+  packager: yarn
+  linting: true
+  bundle:
+    copyFiles:
+      - from: "../../tsconfig.json"
+        to: "../../."
+      - from: "../../.eslintrc"
+        to: "../../."
+  dotenv:
+    path: ../../.env
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: ${opt:stage, 'dev'}
+  region: us-east-1
+
+  environment:
+    STAGE: ${self:provider.stage}
+    REGION: ${self:provider.region}
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - cognito-idp:*
+      Resource: "*"
+
+functions:
+  example:
+    handler: controllers/example.handler
+    timeout: 30
+    events:
+      - http:
+          path: /example
+          method: get
+          cors: true
+
+resources:
+  Resources:
+    GatewayResponse:
+      Type: 'AWS::ApiGateway::GatewayResponse'
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: EXPIRED_TOKEN
+        RestApiId:
+          Ref: 'ApiGatewayRestApi'
+        StatusCode: '401'
+    AuthFailureGatewayResponse:
+      Type: 'AWS::ApiGateway::GatewayResponse'
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: UNAUTHORIZED
+        RestApiId:
+          Ref: 'ApiGatewayRestApi'
+        StatusCode: '401'

@@ -1,0 +1,108 @@
+{
+  "env": {
+    "node": true,
+    "es6": true,
+    "jest": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint", "eslint-comments", "jest", "promise", "unicorn", "import"],
+  "extends": [
+    "airbnb-typescript/base",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:eslint-comments/recommended",
+    "plugin:jest/recommended",
+    "plugin:promise/recommended",
+    "plugin:unicorn/recommended",
+    "plugin:import/errors",
+    "plugin:import/typescript",
+    "prettier",
+    "prettier/@typescript-eslint",
+    "prettier/unicorn"
+  ],
+  "rules": {
+    // configure rules for this project
+    "eslint-comments/disable-enable-pair": ["error", { "allowWholeFile": true }],
+    "unicorn/prevent-abbreviations": [
+      "error",
+      {
+        "whitelist": {
+          "args": true
+        }
+      }
+    ],
+    "no-param-reassign": [2, { "props": true, "ignorePropertyModificationsFor": ["context"] }],
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": ["**/*.test.ts", "**/*.spec.ts", "**/test/**"] }
+    ],
+
+    // code quality
+    "no-magic-numbers": ["error", { "ignoreArrayIndexes": true, "ignore": [1, 0, -1, 2, 3] }],
+
+    // formatting
+    "import/newline-after-import": "warn",
+    "import/order": [
+      "warn",
+      {
+        "groups": [["external", "builtin"], ["internal", "index", "parent"], ["sibling"]],
+        "newlines-between": "always"
+      }
+    ],
+
+    // disable bad dx
+    "unicorn/filename-case": 0,
+    "eslint-comments/no-unlimited-disable": 0,
+    "unicorn/no-abusive-eslint-disable": 0,
+    "unicorn/prefer-query-selector": 0,
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "import/no-cycle": 0,
+    "unicorn/regex-shorthand": 0,
+    "class-methods-use-this": 0,
+    "promise/always-return": 0,
+    "@typescript-eslint/no-misused-promises": 0,
+    "arrow-body-style": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "unicorn/no-fn-reference-in-iterator": 0,
+    "unicorn/no-null": 0,
+    "unicorn/no-reduce": 0,
+    "@typescript-eslint/no-unsafe-assignment": 0,
+    "@typescript-eslint/no-unsafe-member-access": 0,
+    "@typescript-eslint/restrict-template-expressions": 0,
+    "@typescript-eslint/no-unsafe-call": 0,
+    "@typescript-eslint/ban-types": 0,
+    "unicorn/prefer-optional-catch-binding": 0,
+    "@typescript-eslint/no-use-before-define": 0,
+    "no-restricted-syntax": 0,
+    "consistent-return": 0,
+    "no-continue": 0,
+    "promise/no-callback-in-promise": 0,
+    "unicorn/better-regex": 0,
+    "@typescript-eslint/no-throw-literal": 0,
+    "import/no-named-default": 0,
+    "@typescript-eslint/no-unsafe-return": 0,
+
+    // backend only
+    "unicorn/no-for-loop": 0,
+    "no-await-in-loop": 0,
+
+    // allow knex code style
+    "@typescript-eslint/no-floating-promises": "warn",
+    "no-void": 0,
+    "@typescript-eslint/no-explicit-any": 0,
+
+    // change warnings to errors
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-non-null-assertion": "error",
+    "jest/expect-expect": [
+      "error",
+      {
+        "assertFunctionNames": ["expect", "expectToThrow"]
+      }
+    ]
+  }
+}

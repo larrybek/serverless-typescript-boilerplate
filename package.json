@@ -1,0 +1,36 @@
+{
+  "name": "serverless",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=12.17.0"
+  },
+  "main": "handler.js",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint '**/*.js' --ignore-pattern node_modules/",
+    "start:worker": "cd services/worker && yarn start"
+  },
+  "dependencies": {
+    "aws-lambda": "^1.0.6",
+    "aws-sdk": "^2.640.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.66",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-airbnb-typescript": "^8.0.2",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-jest": "^23.17.1",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-unicorn": "^20.1.0",
+    "jest": "^26.1.0",
+    "prettier": "^2.2.0",
+    "serverless": "^2.15.0",
+    "serverless-bundle": "4.1.0",
+    "serverless-dotenv-plugin": "^2.1.1",
+    "serverless-offline": "6.8.0",
+    "smee-client": "^1.1.0"
+  }
+}

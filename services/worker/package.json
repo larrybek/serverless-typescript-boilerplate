@@ -1,0 +1,10 @@
+{
+  "name": "worker",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "../../node_modules/.bin/serverless offline",
+    "test": "../../node_modules/.bin/serverless-bundle test",
+    "debug": "export SLS_DEBUG=* && node --inspect-brk ./../node_modules/.bin/serverless offline -s dev"
+  },
+  "license": "MIC"
+}
